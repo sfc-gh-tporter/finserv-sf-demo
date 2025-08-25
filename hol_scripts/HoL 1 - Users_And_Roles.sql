@@ -64,8 +64,8 @@ use role accountadmin;
 --Just Me! Let's add someone
 create or replace user ANEEL_SFC
     display_name = 'Adam Neel'
-    email = '<REDACTED_EMAIL>'
-    password = '<REDACTED_PASSWORD>'
+    email = 'XXXXXXXXXXXX'
+    password = 'XXXXXXXX'
     default_role = 'SYSADMIN'
     default_warehouse = 'snowflake_se_wh'
     must_change_password = TRUE;

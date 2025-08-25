@@ -127,18 +127,21 @@ from table (
 
 alter table retirement_contributions set enable_schema_evolution = true;
 
+----Instantly Size Up and Down---
+Alter warehouse data_ingestion_wh set warehouse_size = 'MEDIUM';
+
 --Copy into--
 copy into raw_data.retirement_contributions
 from @retirement_contributions_data_stage/new_schema/
 file_format = (format_name = 'parquet_format')
 match_by_column_name = 'CASE_INSENSITIVE';
 
+Alter warehouse data_ingestion_wh set warehouse_size = 'XSMALL';
+
 --The new column will be added
 select * 
 from retirement_contributions 
 limit 100;
-
-----
 
 --Reset: 
 truncate table customers;
