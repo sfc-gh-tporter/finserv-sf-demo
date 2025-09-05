@@ -4,9 +4,9 @@ A comprehensive financial services data model and toolkit for Snowflake, featuri
 
 ## 📁 Repository Structure
 
-### `/setup/` - Core Data Model
+### `/setup_scripts/` - Core Data Model  
 **Data Model**: 5-schema architecture optimized for financial analytics
-- **`schema/create_schema.sql`** - Complete database schema definition
+- **`schema/finserv_db_objects.sql`** - Complete database schema definition
 - **`data/`** - Sample datasets for all tables (CSV/Parquet format)
 
 **Schema Organization:**
@@ -38,8 +38,41 @@ FINSERV_DEMO Database
 
 ### `/hol_scripts/` - Hands-on Lab Training
 Interactive Snowflake training materials for financial services use cases:
-- **HoL 1 - Users_And_Roles.sql** - User management, role creation, and permission grants
-- **HoL 2 - Compute_and_Batch_Data_Loading.sql** - Warehouse management and data loading workflows
+
+#### **HoL 1 - Users_And_Roles.sql** 
+**Snowflake Security Fundamentals**
+- System roles overview (SYSADMIN, ACCOUNTADMIN, SECURITYADMIN, USERADMIN)
+- Custom role creation (`fiserv_admin`) and role hierarchy management
+- Warehouse, database, and schema-level permission grants
+- Future grants for automated permission management
+- User creation with security best practices (password policies, default roles)
+
+#### **HoL 2 - Compute_and_Batch_Data_Loading.sql**
+**Compute Management & Data Loading**
+- Warehouse sizing, auto-suspend/resume configuration
+- Cost attribution using business unit tags
+- External stage management for S3 data sources
+- File format configuration for Parquet and CSV data
+- Schema inference and dynamic table creation from staged data
+- Schema evolution for handling changing data structures
+- Dynamic warehouse scaling during data loading operations
+
+#### **HoL 3 - Snowpipe .sql** 
+**Real-time Data Ingestion with Snowpipe**
+- Snowpipe streaming setup for security trades and cash deposits
+- Auto-ingest configuration with S3 event notifications
+- JSON payload parsing and variant data handling
+- Pipe status monitoring and troubleshooting
+- Integration with AWS SQS for automated file processing
+
+#### **HoL 4 - Data_Governance_and_Security.sql**
+**Advanced Data Governance & Privacy Controls**  
+- Automatic data classification using Snowflake's built-in profiles
+- Custom PII tagging system (high/moderate/low sensitivity levels)
+- Dynamic data masking policies based on user roles
+- Row-level access controls using customer-advisor mappings
+- Tag-based policy automation and governance workflows
+- POLICY_CONTEXT simulation for testing security policies
 
 ## 🔧 Key Features
 
@@ -69,6 +102,13 @@ Interactive Snowflake training materials for financial services use cases:
 - **File Format Support** - Built-in Parquet format configuration for efficient data loading
 - **Primary Key Constraints** - Date dimension with proper primary key implementation
 
+#### Data Governance & Security
+- **Automatic Classification** - Snowflake's CLASSIFICATION_PROFILE for out-of-the-box PII detection
+- **Built-in Semantic Tagging** - System tags for NAME, EMAIL, PHONE categories with privacy levels
+- **Custom Tag Mapping** - Automatic application of user-defined tags based on classification results
+- **Dynamic Data Masking** - Simple role-based masking policies for protecting sensitive data
+- **Easy Monitoring** - SYSTEM$GET_CLASSIFICATION_RESULT for viewing classification outcomes
+
 ### Recurring Cash Flow Generation
 Automated process for generating realistic recurring deposits and withdrawals:
 
@@ -82,8 +122,8 @@ Automated process for generating realistic recurring deposits and withdrawals:
 
 ### 1. Database Setup
 ```sql
--- Run the schema creation script
-@setup/schema/create_schema.sql
+-- Run the schema creation script  
+@setup_scripts/schema/finserv_db_objects.sql
 ```
 
 ### 2. Data Loading  
@@ -104,8 +144,10 @@ FILE_FORMAT = (TYPE = 'CSV' FIELD_OPTIONALLY_ENCLOSED_BY = '"');
 
 ### 3. Run Hands-on Labs
 Execute the training scripts in sequence:
-- `hol_scripts/HoL 1 - Users_And_Roles.sql`
-- `hol_scripts/HoL 2 - Compute_and_Batch_Data_Loading.sql`
+- `hol_scripts/HoL 1 - Users_And_Roles.sql` - Security & user management fundamentals
+- `hol_scripts/HoL 2 - Compute_and_Batch_Data_Loading.sql` - Compute & batch data ingestion  
+- `hol_scripts/HoL 3 - Snowpipe .sql` - Real-time streaming data pipelines
+- `hol_scripts/HoL 4 - Data_Governance_and_Security.sql` - Advanced governance & privacy controls
 
 ## 📊 Sample Data Included
 
